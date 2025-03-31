@@ -9,12 +9,11 @@ const Header = () => {
     setActiveLink(link);
     setIsMenuOpen(false);
   };
-  
 
   return (
     <header className="absolute top-0 left-0 w-full z-50 bg-black text-white">
-      <nav className="p-4 flex items-center justify-between">
-        <div className="font-bold text-xl md:text-2xl text-blue-400">
+      <nav className="p-2 flex items-center justify-between">
+        <div className="hidden md:block font-bold text-xl md:text-2xl text-blue-400">
           Quiz For Programmers
         </div>
         <div className="hidden md:flex space-x-4">
