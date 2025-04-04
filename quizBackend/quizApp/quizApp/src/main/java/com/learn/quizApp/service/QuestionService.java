@@ -32,8 +32,8 @@ public class QuestionService {
         }return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
 
-    public ResponseEntity<String> addQuestion(Question question) {
-         questionrepo.save(question);
-         return new ResponseEntity<>("success",HttpStatus.CREATED);
+    public ResponseEntity<String> addQuestions(List<Question> questions) {
+        questionrepo.saveAll(questions);  // Bulk insert
+        return ResponseEntity.ok("All questions added successfully!");
     }
 }

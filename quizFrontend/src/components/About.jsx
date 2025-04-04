@@ -55,7 +55,7 @@ export default function About() {
 
         <div className="mt-6 text-center">
           <p className="text-gray-400 text-sm">Ready to test your skills and join our community?</p>
-          <a href="/" className="inline-block mt-2 bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition text-sm">
+          <a href="/choose" className="inline-block mt-2 bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition text-sm">
             Start the Quiz
           </a>
         </div>

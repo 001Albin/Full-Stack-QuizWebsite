@@ -26,7 +26,7 @@ export default function Auth() {
         <form onSubmit={handleSubmit} className="bg-gray-950 p-8 rounded-2xl shadow-lg w-full max-w-md">
           <h2 className="text-2xl font-bold mb-6 text-center">Enter Password to Access Quiz</h2>
 
-          <div className="relative w-full"> 
+          <div className="relative w-full">
             <FaLock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg" />
             <input
               type="password"
@@ -36,7 +36,7 @@ export default function Auth() {
               className="w-full p-4 pl-12 rounded-lg border border-gray-700 bg-gray-800 text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-300 placeholder-gray-400 shadow-md"
             />
           </div>
-          
+
           <button type="submit" className="w-full bg-blue-600 text-white p-4 rounded-lg font-semibold hover:bg-blue-700 mt-4">
             Submit
           </button>
@@ -49,16 +49,16 @@ export default function Auth() {
           {questions.map((question) => (
             <div key={question.id} className="relative bg-gray-950 rounded-2xl shadow-lg p-6 mb-6 border border-gray-700">
               <span
-                className={`absolute top-4 right-4 text-xs font-semibold px-3 py-1 rounded-full ${
-                  question.difficultylevel === "Easy"
+                className={`absolute top-4 right-4 text-xs font-semibold px-3 py-1 rounded-full ${question.difficultylevel === "easy"
                     ? "bg-green-800 text-green-300"
-                    : question.difficultylevel === "Medium"
-                    ? "bg-yellow-800 text-yellow-300"
-                    : "bg-red-800 text-red-300"
-                }`}
+                    : question.difficultylevel === "medium"
+                      ? "bg-yellow-800 text-yellow-300"
+                      : "bg-red-800 text-red-300"
+                  }`}
               >
-                {question.difficultylevel}
+                {question.difficultylevel.charAt(0).toUpperCase() + question.difficultylevel.slice(1)}
               </span>
+
 
               <p className="text-sm font-medium text-blue-400">Question ID: {question.id}</p>
               <p className="text-xl font-semibold mb-4">{question.questionTitle}</p>

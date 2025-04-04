@@ -18,7 +18,7 @@ public class QuestionController {
     QuestionService questionService;
 
     @GetMapping("/allQuestions")
-    public ResponseEntity<List<Question>> getAllQuestions(@RequestParam String pass) {
+    public ResponseEntity<List<Question>> getAllQuestions(@RequestParam String pass) {//@RequestParam String pass
         if (pass.equals("mysql202411")) {
             return questionService.getAllQuestions();
         } else {
@@ -34,9 +34,10 @@ public class QuestionController {
     }
 
 
-    @PostMapping("add")
-    public ResponseEntity<String> addQuestion(@RequestBody Question question){
-        return questionService.addQuestion(question);
+    @PostMapping("/addBulk")
+    public ResponseEntity<String> addQuestions(@RequestBody List<Question> questions) {
+        return questionService.addQuestions(questions);
     }
+
 
 }

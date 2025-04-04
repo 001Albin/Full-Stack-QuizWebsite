@@ -1,9 +1,16 @@
 import React from "react";
 import { FaCode, FaJava, FaPython, FaDatabase, FaJs } from 'react-icons/fa';
 import { SiC } from 'react-icons/si'; // Import C icon properly
+import { useNavigate } from "react-router-dom";
+
 
 
 const Home = () => {
+  const navigate = useNavigate(); // Initialize navigation
+
+  const handleStartLearning = () => {
+    navigate("/choose"); // Navigate to /choose when button is clicked
+  };
   return (
     <div className="bg-black text-white min-h-screen flex flex-col items-center justify-center p-4 mt-5">
       <header className="text-center mb-8">
@@ -45,7 +52,8 @@ const Home = () => {
             </li>
           </ul>
           <div className="mt-6 text-center">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-full shadow-md transition-all duration-300 text-sm">
+            <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-full shadow-md transition-all duration-300 text-sm"
+            onClick={handleStartLearning}>
               Start Learning Now
             </button>
           </div>
