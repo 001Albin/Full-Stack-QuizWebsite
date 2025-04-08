@@ -19,6 +19,7 @@ public class QuestionController {
 
     @GetMapping("/allQuestions")
     public ResponseEntity<List<Question>> getAllQuestions(@RequestParam(required = false) String pass) {
+
         if (pass == null || !pass.equals("mysql202411")) {
             System.out.println("Unauthorized access attempt. Invalid or missing password.");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
