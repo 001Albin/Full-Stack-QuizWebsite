@@ -2,7 +2,26 @@ import { useLocation } from "react-router-dom";
 
 const Quiz = () => {
   const { state } = useLocation();
-  const questions = state?.questions || [];
+
+  // Dummy fallback question if no state is passed
+  const dummyQuestions = [
+    {
+      questionTitle: "What is the capital of France?",
+      option1: "Berlin",
+      option2: "London",
+      option3: "Paris",
+      option4: "Rome",
+    },
+    {
+      questionTitle: "Which language runs in a web browser?",
+      option1: "Java",
+      option2: "C",
+      option3: "Python",
+      option4: "JavaScript",
+    },
+  ];
+
+  const questions = state?.questions || dummyQuestions;
 
   return (
     <div className="p-4">

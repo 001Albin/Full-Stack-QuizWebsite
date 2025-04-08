@@ -6,8 +6,9 @@ import Auth from "./components/Auth";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Login from "./components/Login";
-import Quiz from "./components/Quiz";
 import Choose from "./components/Choose";
+import StartQuiz from "./components/StartQuiz";
+import Quiz from "./components/Quiz";
 
 const App = () => {
   return (
@@ -31,6 +32,8 @@ const AppContent = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/choose" element={<Choose/>} />
+        <Route path="/start" element={<StartQuiz/>} />
+        <Route path="/quiz" element={<Quiz/>} />
       </Routes>
       {!isSelectorPage && <Footer />}
     </>

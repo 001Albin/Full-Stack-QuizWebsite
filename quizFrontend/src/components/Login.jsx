@@ -20,9 +20,9 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-black text-white px-4 sm:px-6 lg:px-8">
-      <div className="flex flex-col md:flex-row w-full max-w-4xl bg-gray-900 rounded-lg shadow-lg overflow-hidden">
+      <div className="flex flex-col md:flex-row w-full max-w-4xl bg-black-500 rounded-lg shadow-lg overflow-hidden">
         {/* Left Side - Description */}
-        <div className="hidden md:flex flex-col justify-center p-8 w-1/2 bg-gray-800">
+        <div className="hidden md:flex flex-col justify-center p-8 w-1/2 bg-black-500">
           <h2 className="text-3xl font-bold text-blue-400 mb-4">Welcome Back!</h2>
           <p className="text-gray-400 text-lg">
             Access your account and continue exploring the world of coding challenges and quizzes. Improve your skills and compete with others!

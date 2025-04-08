@@ -23,6 +23,8 @@ const Choose = () => {
           <option value="java">Java</option>
           <option value="javascript">JavaScript</option>
           <option value="python">Python</option>
+          <option value="sql">SQL</option>
+          <option value="Algorithm">Algorithm</option>
         </select>
       </div>
 

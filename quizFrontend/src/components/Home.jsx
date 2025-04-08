@@ -24,7 +24,7 @@ const Home = () => {
 
       <div className="flex flex-col lg:flex-row w-full max-w-6xl gap-6">
         {/* Quiz Info */}
-        <div className="w-full lg:w-1/2 bg-gray-800 bg-opacity-80 backdrop-blur-lg p-6 rounded-3xl shadow-lg border border-gray-700">
+        <div className="w-full lg:w-1/2 bg-black-500 bg-opacity-80 backdrop-blur-lg p-6 rounded-3xl shadow-lg border border-gray-700">
           <h2 className="text-2xl font-semibold mb-4 text-blue-400">
             Advance Your Coding Expertise
           </h2>
@@ -63,33 +63,33 @@ const Home = () => {
         <div className="w-full lg:w-1/2">
           <h2 className="text-2xl font-semibold text-center mb-6">Explore Coding Categories</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            <div className="bg-gradient-to-br from-gray-800 to-gray-700 p-6 rounded-3xl shadow-lg border border-gray-700 text-center transform transition-transform hover:scale-105">
-              <FaCode className="text-4xl text-blue-500 mx-auto mb-4" />
+            <div className="bg-black-500  p-6 rounded-3xl shadow-lg border border-gray-700 text-center transform transition-transform hover:scale-105">
+              <FaCode className="text-4xl text-black-500 mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-4 text-blue-400">Algorithms</h3>
               <p className="text-gray-400 text-sm">Problem-solving skills.</p>
             </div>
-            <div className="bg-gradient-to-br from-gray-800 to-gray-700 p-6 rounded-3xl shadow-lg border border-gray-700 text-center transform transition-transform hover:scale-105">
+            <div className="bg-black-500 to-gray-700 p-6 rounded-3xl shadow-lg border border-gray-700 text-center transform transition-transform hover:scale-105">
               <FaJava className="text-4xl text-green-500 mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-4 text-green-400">Java</h3>
               <p className="text-gray-400 text-sm">Java fundamentals.</p>
             </div>
-            <div className="bg-gradient-to-br from-gray-800 to-gray-700 p-6 rounded-3xl shadow-lg border border-gray-700 text-center transform transition-transform hover:scale-105">
+            <div className="bg-black-500 to-gray-700 p-6 rounded-3xl shadow-lg border border-gray-700 text-center transform transition-transform hover:scale-105">
               <FaPython className="text-4xl text-yellow-500 mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-4 text-yellow-400">Python</h3>
               <p className="text-gray-400 text-sm">Python versatility.</p>
             </div>
-            <div className="bg-gradient-to-br from-gray-800 to-gray-700 p-6 rounded-3xl shadow-lg border border-gray-700 text-center transform transition-transform hover:scale-105">
+            <div className="bg-black-500 p-6 rounded-3xl shadow-lg border border-gray-700 text-center transform transition-transform hover:scale-105">
             <SiC className="text-4xl text-red-500 mx-auto mb-4" />
 
               <h3 className="text-xl font-semibold mb-4 text-red-400">C</h3>
               <p className="text-gray-400 text-sm">C programming basics.</p>
             </div>
-            <div className="bg-gradient-to-br from-gray-800 to-gray-700 p-6 rounded-3xl shadow-lg border border-gray-700 text-center transform transition-transform hover:scale-105">
+            <div className="bg-black-500 p-6 rounded-3xl shadow-lg border border-gray-700 text-center transform transition-transform hover:scale-105">
               <FaDatabase className="text-4xl text-cyan-500 mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-4 text-cyan-400">SQL</h3>
               <p className="text-gray-400 text-sm">Database management and queries.</p>
             </div>
-            <div className="bg-gradient-to-br from-gray-800 to-gray-700 p-6 rounded-3xl shadow-lg border border-gray-700 text-center transform transition-transform hover:scale-105">
+            <div className="bg-black-500 p-6 rounded-3xl shadow-lg border border-gray-700 text-center transform transition-transform hover:scale-105">
               <FaJs className="text-4xl text-orange-500 mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-4 text-orange-400">JavaScript</h3>
               <p className="text-gray-400 text-sm">Web development fundamentals.</p>
