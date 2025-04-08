@@ -18,26 +18,25 @@ public class QuestionController {
     QuestionService questionService;
 
     @GetMapping("/allQuestions")
-    public ResponseEntity<List<Question>> getAllQuestions(@RequestParam String pass) {//@RequestParam String pass
-        if (pass.equals("mysql202411")) {
-            return questionService.getAllQuestions();
-        } else {
+    public ResponseEntity<List<Question>> getAllQuestions(@RequestParam(required = false) String pass) {
+        if (pass == null || !pass.equals("mysql202411")) {
+            System.out.println("Unauthorized access attempt. Invalid or missing password.");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
+
+        System.out.println("Authorized request. Fetching all questions...");
+        return questionService.getAllQuestions();
     }
 
-
-
     @GetMapping("/category/{category}")
-    public ResponseEntity<List<Question>>getQuestionsByCategory(@PathVariable String category){
+    public ResponseEntity<List<Question>> getQuestionsByCategory(@PathVariable String category) {
+        System.out.println("Fetching questions for category: " + category);
         return questionService.getQuestionsByCategory(category);
     }
 
-
     @PostMapping("/addBulk")
     public ResponseEntity<String> addQuestions(@RequestBody List<Question> questions) {
+        System.out.println("Received bulk question upload: " + questions.size() + " questions.");
         return questionService.addQuestions(questions);
     }
-
-
 }
