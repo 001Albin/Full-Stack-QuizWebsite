@@ -6,7 +6,6 @@ import Auth from "./components/Auth";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Login from "./components/Login";
-import Choose from "./components/Choose";
 import StartQuiz from "./components/StartQuiz";
 import Quiz from "./components/Quiz";
 
@@ -31,7 +30,6 @@ const AppContent = () => {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/choose" element={<Choose/>} />
         <Route path="/start" element={<StartQuiz/>} />
         <Route path="/quiz" element={<Quiz/>} />
       </Routes>
