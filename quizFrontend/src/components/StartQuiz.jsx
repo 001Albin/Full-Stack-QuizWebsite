@@ -6,41 +6,75 @@ const StartQuiz = () => {
   const [showModal, setShowModal] = useState(false);
   const [category, setCategory] = useState("");
   const [count, setCount] = useState(5);
+  const [isLoading, setIsLoading] = useState(false); // ⬅️ loading state
 
   const handleStart = async () => {
     if (!category || count <= 0) {
       alert("Please select a valid category and question count.");
       return;
     }
-
-    // Capitalize only the first letter, rest lowercase (e.g., "JavaScript" -> "Javascript" ❌)
-    const formattedCategory = category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
+  
+    const formattedCategory =
+      category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
     const title = `${formattedCategory}Quiz`;
-
-    console.log("Formatted category:", formattedCategory);
-    console.log("Number of questions:", count);
-
+  
     try {
+      setIsLoading(true);
+  
       const response = await fetch(
-        `http://localhost:8080/quiz/create?category=${formattedCategory}&numQ=${count}&title=${title}`,
+        `https://full-stack-quizwebsite-9sk5.onrender.com/quiz/create?category=${formattedCategory}&numQ=${count}&title=${title}`,
         { method: "POST" }
       );
-
+  
       if (!response.ok) {
         throw new Error("Failed to create quiz");
       }
-
+  
       const data = await response.json();
       const quizId = data.quizId;
-      console.log("Quiz created with ID:", quizId); // ✅ Log here
+  
+      // ✅ Wait until questions are actually available
+      const maxRetries = 20; // increased wait time
+      let retryCount = 0;
+      let questions = [];
+  
+      while (retryCount < maxRetries) {
+        try {
+          const res = await fetch(`https://full-stack-quizwebsite-9sk5.onrender.com/quiz/get/${quizId}`);
 
+  
+          if (!res.ok) {
+            throw new Error(`Waiting for quiz... (${res.status})`);
+          }
+  
+          const result = await res.json();
+  
+          if (Array.isArray(result) && result.length > 0) {
+            questions = result;
+            break;
+          }
+        } catch (err) {
+          console.log(`Retry ${retryCount + 1}:`, err.message);
+        }
+  
+        await new Promise((resolve) => setTimeout(resolve, 500)); // wait 500ms
+        retryCount++;
+      }
+  
+      if (!questions || questions.length === 0) {
+        throw new Error("Failed to fetch quiz questions in time.");
+      }
+  
       setShowModal(false);
-      navigate("/quiz", { state: { quizId: quizId } }); // ✅ Use `id` key (match your quiz page)
+      navigate("/quiz", { state: { quizId } });
     } catch (error) {
       console.error("Error:", error);
       alert("Failed to start quiz. Try again later.");
+    } finally {
+      setIsLoading(false);
     }
   };
+  
 
   return (
     <div className="bg-black text-white flex flex-col items-center justify-center min-h-screen p-6">
@@ -74,7 +108,7 @@ const StartQuiz = () => {
                 <option value="javascript">JavaScript</option>
                 <option value="python">Python</option>
                 <option value="sql">SQL</option>
-                <option value="algorithm">Algorithm</option> {/* Make sure to use lowercase */}
+                <option value="algorithm">Algorithm</option>
               </select>
             </div>
 
@@ -89,28 +123,34 @@ const StartQuiz = () => {
               />
             </div>
 
-            <div className="flex justify-between mt-4">
-              <button
-                onClick={() => setShowModal(false)}
-                className="px-4 py-2 bg-amber-900 text-white"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleStart}
-                disabled={!category || count <= 0}
-                className={`px-6 py-2 rounded-lg font-medium shadow-md transition ${
-                  !category || count <= 0
-                    ? "bg-gray-500 cursor-not-allowed"
-                    : "bg-green-500 hover:bg-green-600 text-white"
-                }`}
-              >
-                Start
-              </button>
-            </div>
+            {/* 🔄 Loading State OR Buttons */}
+            {isLoading ? (
+              <div className="text-center py-3 text-green-400 font-semibold">⏳ Creating quiz...</div>
+            ) : (
+              <div className="flex justify-between mt-4">
+                <button
+                  onClick={() => setShowModal(false)}
+                  className="px-4 py-2 bg-amber-900 text-white"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleStart}
+                  disabled={!category || count <= 0}
+                  className={`px-6 py-2 rounded-lg font-medium shadow-md transition ${
+                    !category || count <= 0
+                      ? "bg-gray-500 cursor-not-allowed"
+                      : "bg-green-500 hover:bg-green-600 text-white"
+                  }`}
+                >
+                  Start
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}
+      
     </div>
   );
 };
