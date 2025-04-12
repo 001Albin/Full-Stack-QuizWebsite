@@ -13,42 +13,39 @@ const StartQuiz = () => {
       alert("Please select a valid category and question count.");
       return;
     }
-  
-    const formattedCategory =
-      category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
-    const title = `${formattedCategory}Quiz`;
-  
+
+    const title = `${category}Quiz`; // Keep the category as is, no formatting
+
     try {
       setIsLoading(true);
-  
+
       const response = await fetch(
-        `https://full-stack-quizwebsite-9sk5.onrender.com/quiz/create?category=${formattedCategory}&numQ=${count}&title=${title}`,
+        `https://full-stack-quizwebsite-9sk5.onrender.com/quiz/create?category=${category}&numQ=${count}&title=${title}`,
         { method: "POST" }
       );
-  
+
       if (!response.ok) {
         throw new Error("Failed to create quiz");
       }
-  
+
       const data = await response.json();
       const quizId = data.quizId;
-  
+
       // ✅ Wait until questions are actually available
       const maxRetries = 20; // increased wait time
       let retryCount = 0;
       let questions = [];
-  
+
       while (retryCount < maxRetries) {
         try {
           const res = await fetch(`https://full-stack-quizwebsite-9sk5.onrender.com/quiz/get/${quizId}`);
 
-  
           if (!res.ok) {
             throw new Error(`Waiting for quiz... (${res.status})`);
           }
-  
+
           const result = await res.json();
-  
+
           if (Array.isArray(result) && result.length > 0) {
             questions = result;
             break;
@@ -56,15 +53,15 @@ const StartQuiz = () => {
         } catch (err) {
           console.log(`Retry ${retryCount + 1}:`, err.message);
         }
-  
+
         await new Promise((resolve) => setTimeout(resolve, 500)); // wait 500ms
         retryCount++;
       }
-  
+
       if (!questions || questions.length === 0) {
         throw new Error("Failed to fetch quiz questions in time.");
       }
-  
+
       setShowModal(false);
       navigate("/quiz", { state: { quizId } });
     } catch (error) {
@@ -74,7 +71,6 @@ const StartQuiz = () => {
       setIsLoading(false);
     }
   };
-  
 
   return (
     <div className="bg-black text-white flex flex-col items-center justify-center min-h-screen p-6">
@@ -104,11 +100,11 @@ const StartQuiz = () => {
                 className="w-full p-3 rounded-lg bg-white border border-green-600 text-black"
               >
                 <option value="">--Choose Category--</option>
-                <option value="java">Java</option>
-                <option value="javascript">JavaScript</option>
-                <option value="python">Python</option>
-                <option value="sql">SQL</option>
-                <option value="algorithm">Algorithm</option>
+                <option value="Java">Java</option>
+                <option value="JavaScript">JavaScript</option>
+                <option value="Python">Python</option>
+                <option value="SQL">SQL</option>
+                <option value="Algorithm">Algorithm</option>
               </select>
             </div>
 
@@ -150,7 +146,6 @@ const StartQuiz = () => {
           </div>
         </div>
       )}
-      
     </div>
   );
 };
