@@ -1,0 +1,21 @@
+# Build output
+target/
+
+# Git files
+.git
+.gitignore
+
+# IDEs
+.idea/
+*.iml
+
+# Logs
+*.log
+
+# OS & system files
+.DS_Store
+Thumbs.db
+
+# Node stuff (if any frontend later)
+node_modules/
+dist/
