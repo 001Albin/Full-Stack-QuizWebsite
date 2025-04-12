@@ -9,15 +9,14 @@ const Quiz = () => {
   const [questions, setQuestions] = useState([]);
   const [responses, setResponses] = useState({});
   const [score, setScore] = useState(null);
-  const [loading, setLoading] = useState(true); // NEW
-  
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false); // NEW
 
   useEffect(() => {
     const fetchQuizQuestions = async () => {
       try {
         setLoading(true);
         const res = await fetch(`https://full-stack-quizwebsite-9sk5.onrender.com/quiz/get/${quizId}`);
-
         const data = await res.json();
 
         if (Array.isArray(data) && data.length > 0) {
@@ -53,24 +52,32 @@ const Quiz = () => {
       id: Number(id),
       response,
     }));
-
+  
+    console.log("Submitting payload:", payload); // 👈 This should show up in the console
+  
+    setSubmitting(true);
+  
     try {
       const res = await fetch(`https://full-stack-quizwebsite-9sk5.onrender.com/quiz/submit/${quizId}`, {
-
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(payload),
       });
-
+  
       const result = await res.json();
       setScore(result);
     } catch (error) {
       console.error("Error submitting quiz", error);
       alert("Failed to submit quiz. Try again.");
+    } finally {
+      setSubmitting(false);
     }
   };
+  
+  
+  
 
   const handleGoHome = () => {
     navigate("/");
@@ -82,9 +89,9 @@ const Quiz = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white py-10 px-4 pt-15">
-      <h1 className="text-5xl font-extrabold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-pink-500 to-purple-500 animate-pulse">
-        🚀 Quiz For Programmers
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-950 to-black text-white py-10 px-4">
+      <h1 className="text-5xl font-extrabold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-pink-500 to-purple-500 animate-pulse mt-3 pb-4">
+        🚀Quiz For  Programmers
       </h1>
 
       {loading ? (
@@ -101,7 +108,7 @@ const Quiz = () => {
             key={question.id}
             className="bg-[#0f0f0f] border border-cyan-500 rounded-2xl p-6 mb-8 shadow-md hover:shadow-cyan-500/30 transition-shadow duration-300"
           >
-            <h2 className="text-xl font-bold mb-4 text-cyan-400">
+            <h2 className="text-xl font-bold mb-4 text-cyan-400 pt-5">
               Q{index + 1}: {question.questionTitle}
             </h2>
 
@@ -113,10 +120,10 @@ const Quiz = () => {
                 return (
                   <label
                     key={i}
-                    className={`flex items-center p-2 rounded-lg cursor-pointer transition duration-200 ${
+                    className={`flex items-center p-3 rounded-lg cursor-pointer transition duration-200 border border-transparent ${
                       responses[question.id] === optionText
                         ? "bg-gradient-to-r from-cyan-500 to-purple-500 text-white font-semibold"
-                        : "hover:bg-gray-800"
+                        : "hover:bg-gray-800 border-gray-700"
                     }`}
                   >
                     <input
@@ -124,9 +131,7 @@ const Quiz = () => {
                       name={`question-${question.id}`}
                       value={optionText}
                       checked={responses[question.id] === optionText}
-                      onChange={() =>
-                        handleOptionChange(question.id, optionText)
-                      }
+                      onChange={() => handleOptionChange(question.id, optionText)}
                       className="mr-3 accent-cyan-400"
                     />
                     <span>
@@ -142,12 +147,18 @@ const Quiz = () => {
 
       {!loading && questions.length > 0 && score === null && (
         <div className="text-center mt-10">
-          <button
-            onClick={handleSubmit}
-            className="px-8 py-3 text-lg font-bold rounded-full bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 transition duration-300 text-black shadow-lg hover:scale-105"
-          >
-            ✅ Submit Quiz
-          </button>
+          {submitting ? (
+            <div className="text-cyan-400 font-semibold text-lg animate-pulse">
+              🚀 Submitting your answers...
+            </div>
+          ) : (
+            <button
+              onClick={handleSubmit}
+              className="px-8 py-3 text-lg font-bold rounded-full bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 transition duration-300 text-black shadow-lg hover:scale-105"
+            >
+              ✅ Submit Quiz
+            </button>
+          )}
         </div>
       )}
 
