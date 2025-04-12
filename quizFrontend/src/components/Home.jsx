@@ -12,7 +12,7 @@ const Home = () => {
     navigate("/start"); // Navigate to /choose when button is clicked
   };
   return (
-    <div className="bg-black text-white min-h-screen flex flex-col items-center justify-center p-4 mt-5">
+    <div className="bg-black text-white min-h-screen flex flex-col items-center justify-center p-4 mt-7">
       <header className="text-center mb-8">
         <h1 className="text-3xl font-extrabold mb-3 tracking-tight leading-tight text-green-500">
           Master Coding with Interactive Quizzes
@@ -72,7 +72,7 @@ const Home = () => {
               </div>
             </a>
 
-            <a href="https://www.javatpoint.com/java-tutorial" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.w3schools.com/java/" target="_blank" rel="noopener noreferrer">
               <div className="bg-black-500 p-6 rounded-3xl shadow-lg border border-gray-700 text-center transform transition-transform hover:scale-105">
                 <FaJava className="text-4xl text-green-500 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold mb-4 text-green-400">Java</h3>
