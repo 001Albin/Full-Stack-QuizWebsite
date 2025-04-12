@@ -6,10 +6,10 @@ FROM eclipse-temurin:21-jdk as build
 # Set the working directory for the build stage
 WORKDIR /app
 
-# Copy the whole repository into the container
-COPY . /app
+# Copy the entire quizBackend/quizApp/quizApp folder into the container
+COPY quizBackend/quizApp/quizApp /app
 
-# Give execute permissions to mvnw script
+# Make sure mvnw is executable
 RUN chmod +x ./mvnw
 
 # Build the JAR file (skip tests for faster build)
