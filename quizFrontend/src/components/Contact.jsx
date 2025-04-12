@@ -30,8 +30,8 @@ const Contact = () => {
   };
 
   return (
-    <div className="bg-black min-h-screen flex items-center justify-center p-6 text-white">
-      <div className="w-full max-w-4xl bg-gray-950 bg-opacity-80 backdrop-blur-lg rounded-2xl p-8 shadow-xl border border-blue-500">
+    <div className="bg-black min-h-screen flex items-center justify-center p-6 text-white mt-5">
+      <div className="w-full max-w-4xl bg-black bg-opacity-80 backdrop-blur-lg rounded-2xl p-8 shadow-xl border border-blue-500">
         <h2 className="text-3xl font-semibold text-blue-400 tracking-wide text-center mb-6">Contact Us</h2>
         <div className="flex flex-col md:flex-row space-y-8 md:space-y-0 md:space-x-10">
           <div className="md:w-1/2 text-gray-300">
