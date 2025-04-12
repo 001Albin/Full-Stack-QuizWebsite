@@ -1,6 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate hook
 
 export default function About() {
+  const navigate = useNavigate(); // Initialize navigation
+
+  const handleStartLearning = () => {
+    navigate("/start"); // Navigate to /start when button is clicked
+  };
+
   return (
     <div className="min-h-screen bg-black text-white flex items-center justify-center p-4 mt-5">
       <div className="max-w-7xl w-full bg-black p-8 rounded-2xl shadow-lg border border-gray-800">
@@ -55,9 +62,12 @@ export default function About() {
 
         <div className="mt-6 text-center">
           <p className="text-gray-400 text-sm">Ready to test your skills and join our community?</p>
-          <a href="/start" className="inline-block mt-2 bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition text-sm">
+          <button 
+            onClick={handleStartLearning} // Button click calls handleStartLearning
+            className="inline-block mt-2 bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition text-sm"
+          >
             Start the Quiz
-          </a>
+          </button>
         </div>
       </div>
     </div>
