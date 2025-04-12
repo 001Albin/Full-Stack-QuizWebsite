@@ -12,7 +12,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("quiz")
-@CrossOrigin(origins = "http://localhost:5173/")
+@CrossOrigin(origins = {"http://localhost:5173/", "https://quizforprogrammers.netlify.app/"})
 public class QuizController {
 
     @Autowired
