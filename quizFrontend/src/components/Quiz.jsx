@@ -10,7 +10,7 @@ const Quiz = () => {
   const [responses, setResponses] = useState({});
   const [score, setScore] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [submitting, setSubmitting] = useState(false); // NEW
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     const fetchQuizQuestions = async () => {
@@ -40,23 +40,33 @@ const Quiz = () => {
     }
   }, [quizId, navigate]);
 
-  const handleOptionChange = (questionId, selectedOption) => {
+  const handleOptionChange = (questionId, selectedOptionKey) => {
     setResponses((prev) => ({
       ...prev,
-      [questionId]: selectedOption,
+      [String(questionId)]: selectedOptionKey,
     }));
   };
 
   const handleSubmit = async () => {
-    const payload = Object.entries(responses).map(([id, response]) => ({
-      id: Number(id),
-      response,
-    }));
-  
-    console.log("Submitting payload:", payload); // 👈 This should show up in the console
-  
+    if (Object.keys(responses).length < questions.length) {
+      alert("⚠️ Please answer all questions before submitting.");
+      return;
+    }
+
+    const payload = questions.map((question) => {
+      const selectedOptionKey = responses[String(question.id)];
+      const selectedAnswerText = question[selectedOptionKey];
+
+      return {
+        id: question.id,
+        response: selectedAnswerText ?? "", // fallback in case of bug
+      };
+    });
+
+    console.log("Submitting payload:", payload);
+
     setSubmitting(true);
-  
+
     try {
       const res = await fetch(`https://full-stack-quizwebsite-9sk5.onrender.com/quiz/submit/${quizId}`, {
         method: "POST",
@@ -65,7 +75,7 @@ const Quiz = () => {
         },
         body: JSON.stringify(payload),
       });
-  
+
       const result = await res.json();
       setScore(result);
     } catch (error) {
@@ -75,9 +85,6 @@ const Quiz = () => {
       setSubmitting(false);
     }
   };
-  
-  
-  
 
   const handleGoHome = () => {
     navigate("/");
@@ -91,7 +98,7 @@ const Quiz = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-950 to-black text-white py-10 px-4">
       <h1 className="text-5xl font-extrabold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-pink-500 to-purple-500 animate-pulse mt-3 pb-4">
-        🚀Quiz For  Programmers
+        🚀Quiz For Programmers
       </h1>
 
       {loading ? (
@@ -121,7 +128,7 @@ const Quiz = () => {
                   <label
                     key={i}
                     className={`flex items-center p-3 rounded-lg cursor-pointer transition duration-200 border border-transparent ${
-                      responses[question.id] === optionText
+                      responses[String(question.id)] === optKey
                         ? "bg-gradient-to-r from-cyan-500 to-purple-500 text-white font-semibold"
                         : "hover:bg-gray-800 border-gray-700"
                     }`}
@@ -129,9 +136,9 @@ const Quiz = () => {
                     <input
                       type="radio"
                       name={`question-${question.id}`}
-                      value={optionText}
-                      checked={responses[question.id] === optionText}
-                      onChange={() => handleOptionChange(question.id, optionText)}
+                      value={optKey}
+                      checked={responses[String(question.id)] === optKey}
+                      onChange={() => handleOptionChange(question.id, optKey)}
                       className="mr-3 accent-cyan-400"
                     />
                     <span>
@@ -154,7 +161,12 @@ const Quiz = () => {
           ) : (
             <button
               onClick={handleSubmit}
-              className="px-8 py-3 text-lg font-bold rounded-full bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 transition duration-300 text-black shadow-lg hover:scale-105"
+              disabled={Object.keys(responses).length < questions.length}
+              className={`px-8 py-3 text-lg font-bold rounded-full transition duration-300 text-black shadow-lg hover:scale-105 ${
+                Object.keys(responses).length < questions.length
+                  ? "bg-gray-500 cursor-not-allowed"
+                  : "bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500"
+              }`}
             >
               ✅ Submit Quiz
             </button>
