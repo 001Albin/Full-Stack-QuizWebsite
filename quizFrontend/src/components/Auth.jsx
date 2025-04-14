@@ -11,9 +11,12 @@ export default function Auth() {
     e.preventDefault();
 
     try {
-      const response = await axios.get("http://localhost:8080/question/allQuestions", {
-        params: { pass: password },
-      });
+      const response = await axios.get(
+        "https://full-stack-quizwebsite-9sk5.onrender.com/question/allQuestions",
+        {
+          params: { pass: password },
+        }
+      );
       setQuestions(response.data);
     } catch (err) {
       setError("Incorrect password. Try again.");
