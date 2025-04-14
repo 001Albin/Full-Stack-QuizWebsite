@@ -105,6 +105,7 @@ const StartQuiz = () => {
                 <option value="Python">Python</option>
                 <option value="SQL">SQL</option>
                 <option value="Algorithm">Algorithm</option>
+                <option value="C">C</option>
               </select>
             </div>
 
