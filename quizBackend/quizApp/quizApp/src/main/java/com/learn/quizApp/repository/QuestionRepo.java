@@ -11,7 +11,7 @@ import java.util.List;
 public interface QuestionRepo extends JpaRepository<Question,Integer> {
     List<Question> findByCategory(String category);
 
-  @Query(value = "SELECT DISTINCT ON (q.questionTitle) q.* FROM question q WHERE q.category = :category ORDER BY q.questionTitle, RANDOM() LIMIT :numQ", nativeQuery = true)
+ @Query(value = "SELECT DISTINCT ON (q.question_title) q.* FROM question q WHERE q.category = :category ORDER BY q.question_title, RANDOM() LIMIT :numQ", nativeQuery = true)
+List<Question> findRandomQuestionsByCategory(String category, int numQ);
 
-    List<Question> findRandomQuestionsByCategory(String category, int numQ);
 }
