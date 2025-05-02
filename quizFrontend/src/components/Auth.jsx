@@ -1,11 +1,14 @@
 import { useState } from "react";
-import { FaLock } from "react-icons/fa";
+import { FaLock, FaFilter, FaPlus, FaTrash } from "react-icons/fa";
 import axios from "axios";
 
 export default function Auth() {
   const [password, setPassword] = useState("");
   const [questions, setQuestions] = useState([]);
   const [error, setError] = useState("");
+  const [filterVisible, setFilterVisible] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [questionToDelete, setQuestionToDelete] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,6 +24,36 @@ export default function Auth() {
     } catch (err) {
       setError("Incorrect password. Try again.");
     }
+  };
+
+  const handleFilterClick = () => {
+    setFilterVisible(!filterVisible);
+  };
+
+  const handleCategorySelect = async (category) => {
+    setSelectedCategory(category);
+    setFilterVisible(false);
+
+    try {
+      const response = await axios.get(
+        `https://full-stack-quizwebsite-9sk5.onrender.com/question/category/${category}`
+      );
+      setQuestions(response.data);
+    } catch (err) {
+      setError("Unable to fetch questions for the selected category.");
+    }
+  };
+
+  const handleDeleteQuestion = (id) => {
+    axios
+      .delete(`https://full-stack-quizwebsite-9sk5.onrender.com/question/delete/${id}`)
+      .then(() => {
+        setQuestions(questions.filter((question) => question.id !== id));
+        setQuestionToDelete(null);
+      })
+      .catch(() => {
+        setError("Failed to delete the question.");
+      });
   };
 
   return (
@@ -47,21 +80,64 @@ export default function Auth() {
           {error && <p className="text-red-500 text-sm mt-4 text-center">{error}</p>}
         </form>
       ) : (
-        <div className="w-full max-w-3xl space-y-6 pt-10">
-          <h2 className="text-3xl font-bold text-blue-500 text-center mb-8">Question Bank!</h2>
+        <div className="w-full max-w-2xl space-y-6 pt-10">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-3xl font-bold text-blue-500 text-center">Question Bank!</h2>
+            <div className="flex space-x-4">
+              <button
+                onClick={handleFilterClick}
+                className="text-white text-lg p-2 border-2 border-gray-800 rounded-full hover:bg-gray-700"
+              >
+                <FaFilter />
+              </button>
+              <button
+                onClick={() => alert("Add Question functionality will be implemented later.")}
+                className="text-white text-lg p-2 border-2 border-gray-800 rounded-full hover:bg-gray-700"
+              >
+                <FaPlus />
+              </button>
+              <button
+                onClick={() => alert("Delete functionality will be implemented later.")}
+                className="text-white text-lg p-2 border-2 border-gray-800 rounded-full hover:bg-gray-700"
+              >
+                <FaTrash />
+              </button>
+            </div>
+          </div>
+
+          {/* Filter Pop-up (Glass effect Dialog) */}
+          {filterVisible && (
+           <div className="fixed inset-0 bg-transpernt flex items-center justify-center z-50">
+           <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl shadow-xl p-6 max-w-xs w-full">
+             <h3 className="text-xl font-semibold text-center text-blue-500 mb-4">Select Category</h3>
+             {["Java", "Python", "C", "SQL", "JavaScript", "Algorithm"].map((category) => (
+               <button
+                 key={category}
+                 onClick={() => handleCategorySelect(category)}
+                 className="w-full text-left text-white p-3 mb-2 rounded-lg bg-black hover:bg-blue-700 transition"
+               >
+                 {category}
+               </button>
+             ))}
+           </div>
+         </div>
+         
+          )}
+
+          {/* Display Questions */}
           {questions.map((question) => (
             <div key={question.id} className="relative bg-gray-950 rounded-2xl shadow-lg p-6 mb-6 border border-gray-700">
               <span
-                className={`absolute top-4 right-4 text-xs font-semibold px-3 py-1 rounded-full ${question.difficultylevel === "easy"
+                className={`absolute top-4 right-4 text-xs font-semibold px-3 py-1 rounded-full ${
+                  question.difficultylevel === "easy"
                     ? "bg-green-800 text-green-300"
                     : question.difficultylevel === "medium"
-                      ? "bg-yellow-800 text-yellow-300"
-                      : "bg-red-800 text-red-300"
-                  }`}
+                    ? "bg-yellow-800 text-yellow-300"
+                    : "bg-red-800 text-red-300"
+                }`}
               >
                 {question.difficultylevel.charAt(0).toUpperCase() + question.difficultylevel.slice(1)}
               </span>
-
 
               <p className="text-sm font-medium text-blue-400">Question ID: {question.id}</p>
               <p className="text-xl font-semibold mb-4">{question.questionTitle}</p>
