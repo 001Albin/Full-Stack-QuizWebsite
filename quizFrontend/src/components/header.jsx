@@ -10,7 +10,7 @@ const Header = () => {
     pathname === path ? 'bg-blue-500' : '';
 
   const handleLinkClick = () => {
-    setIsMenuOpen(false); // just close the menu
+    setIsMenuOpen(false); // Close menu on link click
   };
 
   return (
@@ -19,6 +19,8 @@ const Header = () => {
         <div className="hidden md:block font-bold text-xl md:text-2xl text-blue-400">
           Quiz For Programmers
         </div>
+
+        {/* Desktop Nav Links */}
         <div className="hidden md:flex space-x-4">
           <Link to="/" onClick={handleLinkClick}
             className={`p-2 rounded hover:bg-blue-800 ${isActive('/')}`}>
@@ -37,21 +39,30 @@ const Header = () => {
             Login
           </Link>
         </div>
+
+        {/* Mobile Toggle Button */}
         <div className="md:hidden">
-          <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
+          <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="focus:outline-none">
+            {isMenuOpen ? (
+              // Close Icon
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              // Hamburger Icon
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
           </button>
         </div>
       </nav>
 
+      {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="md:hidden bg-black p-4">
           <div className="flex flex-col space-y-2">
