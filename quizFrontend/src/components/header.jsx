@@ -64,7 +64,7 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-black p-4">
+        <div className="md:hidden bg-black p-8">
           <div className="flex flex-col space-y-2">
             <Link to="/" onClick={handleLinkClick}
               className={`p-2 rounded hover:bg-blue-800 ${isActive('/')}`}>

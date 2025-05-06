@@ -12,7 +12,7 @@ const Home = () => {
     navigate("/start"); // Navigate to /choose when button is clicked
   };
   return (
-    <div className="bg-black text-white min-h-screen flex flex-col items-center justify-center p-4 mt-7">
+    <div className="bg-black text-white min-h-screen flex flex-col items-center justify-center p-4 mt-6">
       <header className="text-center mb-8">
         <h1 className="text-3xl font-extrabold mb-3 tracking-tight leading-tight text-green-500">
           Master Coding with Interactive Quizzes
