@@ -10,6 +10,20 @@ export default function About() {
 
   return (
     <div className="min-h-screen bg-black text-white flex items-center justify-center p-4 mt-5">
+      <div className="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none">
+        {/* Existing blurs */}
+        <div className="absolute top-10 left-10 w-24 h-24 bg-blue-500 rounded-full blur-xl"></div>
+        <div className="absolute bottom-10 right-10 w-32 h-32 bg-indigo-600 rounded-full blur-xl"></div>
+        <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-purple-600 rounded-full blur-lg"></div>
+
+        {/* Additional blurs */}
+        <div className="absolute top-20 right-1/3 w-20 h-20 bg-pink-500 rounded-full blur-xl"></div>
+        <div className="absolute bottom-20 left-1/3 w-28 h-28 bg-yellow-400 rounded-full blur-xl"></div>
+        <div className="absolute top-1/4 right-20 w-16 h-16 bg-green-400 rounded-full blur-lg"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-24 h-24 bg-red-500 rounded-full blur-2xl"></div>
+      </div>
+
+
       <div className="max-w-7xl w-full bg-black p-8 rounded-2xl shadow-lg border border-gray-800">
         <h1 className="text-3xl font-bold text-blue-500 text-center mb-4">About Our Quiz for Programmers</h1>
         <p className="text-gray-300 text-lg leading-relaxed text-center mb-6">
@@ -62,7 +76,7 @@ export default function About() {
 
         <div className="mt-6 text-center">
           <p className="text-gray-400 text-sm">Ready to test your skills and join our community?</p>
-          <button 
+          <button
             onClick={handleStartLearning} // Button click calls handleStartLearning
             className="inline-block mt-2 bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition text-sm"
           >

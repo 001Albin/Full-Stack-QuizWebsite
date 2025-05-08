@@ -58,6 +58,18 @@ export default function Auth() {
 
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center p-6 text-white">
+       <div className="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none">
+          {/* Existing blurs */}
+          <div className="absolute top-10 left-10 w-24 h-24 bg-blue-500 rounded-full blur-xl"></div>
+          <div className="absolute bottom-10 right-10 w-32 h-32 bg-indigo-600 rounded-full blur-xl"></div>
+          <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-purple-600 rounded-full blur-lg"></div>
+
+          {/* Additional blurs */}
+          <div className="absolute top-20 right-1/3 w-20 h-20 bg-pink-500 rounded-full blur-xl"></div>
+          <div className="absolute bottom-20 left-1/3 w-28 h-28 bg-yellow-400 rounded-full blur-xl"></div>
+          <div className="absolute top-1/4 right-20 w-16 h-16 bg-green-400 rounded-full blur-lg"></div>
+          <div className="absolute bottom-1/3 right-1/4 w-24 h-24 bg-red-500 rounded-full blur-2xl"></div>
+        </div>
       {!questions.length ? (
         <form onSubmit={handleSubmit} className="bg-gray-950 p-8 rounded-2xl shadow-lg w-full max-w-md">
           <h2 className="text-2xl font-bold mb-6 text-center">Enter Password to Access Quiz</h2>

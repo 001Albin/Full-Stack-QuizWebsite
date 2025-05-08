@@ -33,10 +33,23 @@ export default function ContactForm() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Contact Info */}
           <div className="space-y-6">
+            <div className="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none">
+              {/* Existing blurs */}
+              <div className="absolute top-10 left-10 w-24 h-24 bg-blue-500 rounded-full blur-xl"></div>
+              <div className="absolute bottom-10 right-10 w-32 h-32 bg-indigo-600 rounded-full blur-xl"></div>
+              <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-purple-600 rounded-full blur-lg"></div>
+
+              {/* Additional blurs */}
+              <div className="absolute top-20 right-1/3 w-20 h-20 bg-pink-500 rounded-full blur-xl"></div>
+              <div className="absolute bottom-20 left-1/3 w-28 h-28 bg-yellow-400 rounded-full blur-xl"></div>
+              <div className="absolute top-1/4 right-20 w-16 h-16 bg-green-400 rounded-full blur-lg"></div>
+              <div className="absolute bottom-1/3 right-1/4 w-24 h-24 bg-red-500 rounded-full blur-2xl"></div>
+            </div>
+
             <div className="bg-black border border-gray-800 p-6 rounded-lg shadow-md">
               <div className="flex items-start">
                 <div className="text-blue-400 mr-4">
-                  <MapPin className="w-6 h-3" />
+                  <MapPin className="w-6 h-6" />
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold">Location</h3>
