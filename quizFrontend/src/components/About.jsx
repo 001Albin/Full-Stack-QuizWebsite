@@ -9,7 +9,7 @@ export default function About() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center p-4 mt-5">
+    <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">
       <div className="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none">
         {/* Existing blurs */}
         <div className="absolute top-10 left-10 w-24 h-24 bg-blue-500 rounded-full blur-xl"></div>

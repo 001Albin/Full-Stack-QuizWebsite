@@ -14,7 +14,7 @@ const Header = () => {
   };
 
   return (
-    <header className="absolute top-0 left-0 w-full z-50 bg-black text-white">
+    <header className="absolute top-0 left-0 w-full z-50 bg-transparent text-white">
       <nav className="p-2 flex items-center justify-between">
         <div className="hidden md:block font-bold text-xl md:text-2xl text-blue-400">
           Quiz For Programmers

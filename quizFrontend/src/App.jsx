@@ -25,7 +25,13 @@ const AppContent = () => {
     <>
       {!isSelectorPage && <Header />}
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={
+          <>
+          <Home />
+          <About />
+          <Contact />
+          </>
+          } />
         <Route path="/auth" element={<Auth />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />

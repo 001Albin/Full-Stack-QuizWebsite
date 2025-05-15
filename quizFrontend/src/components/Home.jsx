@@ -3,30 +3,23 @@ import { FaCode, FaJava, FaPython, FaDatabase, FaJs } from 'react-icons/fa';
 import { SiC } from 'react-icons/si'; // Import C icon properly
 import { useNavigate } from "react-router-dom";
 
-
-
 const Home = () => {
   const navigate = useNavigate(); // Initialize navigation
 
   const handleStartLearning = () => {
     navigate("/start"); // Navigate to /choose when button is clicked
   };
-  return (
-    <div className="bg-black text-white min-h-screen flex flex-col items-center justify-center p-4 mt-6">
-      <div className="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none">
-        {/* Existing blurs */}
-        <div className="absolute top-10 left-10 w-24 h-24 bg-blue-500 rounded-full blur-xl"></div>
-        <div className="absolute bottom-10 right-10 w-32 h-32 bg-indigo-600 rounded-full blur-xl"></div>
-        <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-purple-600 rounded-full blur-lg"></div>
 
-        {/* Additional blurs */}
-        <div className="absolute top-20 right-1/3 w-20 h-20 bg-pink-500 rounded-full blur-xl"></div>
-        <div className="absolute bottom-20 left-1/3 w-28 h-28 bg-yellow-400 rounded-full blur-xl"></div>
-        <div className="absolute top-1/4 right-20 w-16 h-16 bg-green-400 rounded-full blur-lg"></div>
-        <div className="absolute bottom-1/3 right-1/4 w-24 h-24 bg-red-500 rounded-full blur-2xl"></div>
+  return (
+    <div className="relative bg-black text-white min-h-screen flex flex-col items-center justify-center p-4">
+      <div className="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none">
+        {/* Responsive Blurred Circles */}
+        <div className="absolute bottom-8 left-1/3 w-24 h-24 bg-yellow-400 rounded-full blur-xl sm:bottom-20 md:bottom-20 md:left-1/3 md:w-28 md:h-28"></div>
+        <div className="absolute top-1/2 right-8 w-12 h-12 bg-green-400 rounded-full blur-lg sm:top-1/4 md:top-1/4 md:right-20 md:w-16 md:h-16"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-20 h-20 bg-red-500 rounded-full blur-2xl sm:bottom-1/4 md:bottom-1/3 md:right-1/4 md:w-24 md:h-24"></div>
       </div>
 
-      <header className="text-center mb-8">
+      <header className="text-center mb-8 z-10">
         <h1 className="text-3xl font-extrabold mb-3 tracking-tight leading-tight text-green-500">
           Master Coding with Interactive Quizzes
         </h1>
@@ -35,7 +28,7 @@ const Home = () => {
         </p>
       </header>
 
-      <div className="flex flex-col lg:flex-row w-full max-w-6xl gap-6">
+      <div className="flex flex-col lg:flex-row w-full max-w-6xl gap-6 z-10">
         {/* Quiz Info */}
         <div className="w-full lg:w-1/2 bg-black-500 bg-opacity-80 backdrop-blur-lg p-6 rounded-3xl shadow-lg border border-gray-700">
           <h2 className="text-2xl font-semibold mb-4 text-blue-400">
@@ -65,8 +58,10 @@ const Home = () => {
             </li>
           </ul>
           <div className="mt-6 text-center">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-full shadow-md transition-all duration-300 text-sm"
-              onClick={handleStartLearning}>
+            <button
+              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-full shadow-md transition-all duration-300 text-sm"
+              onClick={handleStartLearning}
+            >
               Start Learning Now
             </button>
           </div>
@@ -76,7 +71,6 @@ const Home = () => {
         <div className="w-full lg:w-1/2">
           <h2 className="text-2xl font-semibold text-center mb-6">Choose a Coding Category to Begin Your Learning Journey</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-
             <a href="https://www.geeksforgeeks.org/fundamentals-of-algorithms/" target="_blank" rel="noopener noreferrer">
               <div className="bg-black-500 p-6 rounded-3xl shadow-lg border border-gray-700 text-center transform transition-transform hover:scale-105">
                 <FaCode className="text-4xl text-black-500 mx-auto mb-4" />
@@ -124,10 +118,8 @@ const Home = () => {
                 <p className="text-gray-400 text-sm">Web development fundamentals.</p>
               </div>
             </a>
-
           </div>
         </div>
-
       </div>
     </div>
   );
