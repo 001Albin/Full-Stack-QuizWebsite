@@ -41,7 +41,6 @@ export default function Login() {
         </div>
         {/* Left Side - Description */}
         <div className="hidden md:flex flex-col justify-center p-10 w-1/2 bg-gradient-to-br from-black to-gray-950 relative overflow-hidden">
-
           <div className="relative z-10">
             <h2 className="text-4xl font-bold text-white mb-6">
               {isSignUp ? "Join Our Community" : "Welcome Back!"}
